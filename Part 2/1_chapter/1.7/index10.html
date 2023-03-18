@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <thead>
+          <tr>
+            <th>Name</th><th>Surname</th><th>Age</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John</td><td>Smith</td><td>10</td>
+          </tr>
+          <tr>
+            <td>Pete</td><td>Brown</td><td>15</td>
+          </tr>
+          <tr>
+            <td>Ann</td><td>Lee</td><td>5</td>
+          </tr>
+          <tr>
+            <td>...</td><td>...</td><td>...</td>
+          </tr>
+        </tbody>
+    </table>
+
+    <script>
+        let data = [];
+        let tableData = document.querySelector('table tbody');
+
+        for (let i = 0; i < tableData.children.length - 1; i++) {
+            let row = tableData.children[i];
+            data.push({
+                name: row.children[0].textContent,
+                surname: row.children[1].textContent,
+                age: row.children[2].textContent
+            });
+        }
+
+        data.sort((a, b) => a.name > b.name);
+
+        tableData.innerHTML = '';
+
+        data.forEach(person => {
+            let tData = document.createElement('tr');
+            tData.innerHTML = `<td>${person.name}</td><td>${person.surname}</td><td>${person.age}</td>`;
+            tableData.append(tData);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container"></div>
+    <!-- <script>
+        let data = {
+            "Рыбы": {
+                "форель": {},
+                "лосось": {}
+            },
+
+            "Деревья": {
+                "Огромные": {
+                "секвойя": {},
+                "дуб": {}
+                },
+                "Цветковые": {
+                "яблоня": {},
+                "магнолия": {}
+                }
+            }
+        };
+
+        let container = document.querySelector('.container');
+        container.innerHTML = createTree(data);
+
+        function createTree(data) {
+            let inner = '';
+
+            for (let key in data) {
+                inner += `<li>${key}${createTree(data[key])}</li>`;
+            }
+
+            return inner ? `<ul>${inner}</ul>` : '';
+        }
+    </script> -->
+    <script>
+        let data = {
+            "Рыбы": {
+                "форель": {},
+                "лосось": {}
+            },
+
+            "Деревья": {
+                "Огромные": {
+                "секвойя": {},
+                "дуб": {}
+                },
+                "Цветковые": {
+                "яблоня": {},
+                "магнолия": {}
+                }
+            }
+        };
+
+        let container = document.querySelector('.container');
+        container.append(createTree(data));
+
+        function createTree(data) {
+            if (Object.keys(data).length > 0) {
+                let list = document.createElement('ul');
+
+                for (let key in data) {
+                    let elem = document.createElement('li');
+                    elem.textContent = key;
+                    elem.append(createTree(data[key]));
+                    list.append(elem);
+                }
+  
+                return list;
+            }
+
+            return '';
+        }
+    </script>
+</body>
+</html>

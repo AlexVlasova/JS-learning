@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .hours {
+            color: red;
+        }
+
+        .minutes {
+            color: green;
+        }
+
+        .blue {
+            color: blue;
+        }
+
+        button {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <span class="hours">00</span>:<span class="minutes">00</span>:<span class="seconds">00</span>
+    </div>
+    <button onClick="startClock()">Start</button><button onClick="stopClock()">Stop</button>
+    <script>
+        function updateTime() {
+            let hoursContainer = document.querySelector('.hours'),
+                minutesContainer = document.querySelector('.minutes'),
+                secondsContainer = document.querySelector('.seconds');
+
+            let date = new Date();
+            let hours = date.getHours();
+            if (hours < 10) hours = '0' + hours;
+            hoursContainer.textContent = hours;
+
+            let minutes = date.getMinutes();
+            if (minutes < 10) minutes = '0' + minutes;
+            minutesContainer.textContent = minutes;
+
+            let seconds = date.getSeconds();
+            if (seconds < 10) seconds = '0' + seconds;
+            secondsContainer.textContent = seconds;
+        }
+
+        let timer;
+
+        function startClock() {
+            timer = setInterval(updateTime, 1000);
+            updateTime();
+        }
+
+        function stopClock() {
+            clearInterval(timer);
+            timerId = null;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<table id="table">
+    aaa
+    <tr>
+        <td>Тест</td>
+    </tr>
+</table>
+
+<script>
+    alert(table); // таблица, как и должно быть
+
+    table.remove();
+    // aaa остается, так как html некорректен. Строка перемещается ДО таблицы
+</script>

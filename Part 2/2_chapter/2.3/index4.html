@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+        margin: 0;
+        padding: 20px;
+        height: 2000px;
+        position: relative;
+    }
+
+    p {
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    .tooltip {
+      /* немного стилизуем подсказку, можете использовать свои стили вместо этих */
+      position: fixed;
+      padding: 10px 20px;
+      border: 1px solid #b3c9ce;
+      border-radius: 4px;
+      text-align: center;
+      font: italic 14px/1.3 sans-serif;
+      color: #333;
+      background: #fff;
+      box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
+    }
+
+    .help {
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 3px;
+        text-align: center;
+        position: absolute;
+        padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
+  <p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
+  <p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
+
+  <button data-tooltip="эта подсказка должна быть длиннее, чем элемент">Короткая кнопка</button>
+  <button data-tooltip="HTML<br>подсказка">Ещё кнопка</button>
+
+  <p>Прокрутите страницу, чтобы кнопки оказались у верхнего края, а затем проверьте правильно ли выводятся подсказки.</p>
+
+
+  <script>
+    document.addEventListener('mouseover', e => {
+        const target = e.target;
+        if (!target.dataset.tooltip) return;
+
+        createHelper(target.dataset.tooltip, target);
+    });
+
+    document.addEventListener('mouseout', e => {
+        const target = e.target;
+        if (!target.dataset.tooltip) return;
+
+        removeHelper();
+    });
+
+    function createHelper(text, parent) {
+        let helperElement = document.createElement('div');
+        helperElement.classList.add('help');
+        helperElement.innerHTML = text;
+
+        document.body.append(helperElement);
+
+        let leftPosition = parent.offsetLeft;
+        let topPosition = parent.offsetTop;
+
+        let helperWidth = helperElement.offsetWidth;
+        let helperHeight = helperElement.offsetHeight;
+
+        leftPosition += (parent.offsetWidth - helperWidth) / 2;
+        if (leftPosition < 0) leftPosition = 0;
+
+        topPosition -= helperHeight + 5;
+        if (topPosition - window.pageYOffset < 0) topPosition = parent.offsetTop + parent.offsetHeight + 5;
+
+        helperElement.style.left = leftPosition + 'px';
+        helperElement.style.top = topPosition + 'px';
+    }
+
+    function removeHelper() {
+        let helperElement = document.querySelector('.help');
+        helperElement.remove();
+    }
+  </script>
+
+</body>
+</html>

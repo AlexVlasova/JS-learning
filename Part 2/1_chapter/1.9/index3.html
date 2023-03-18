@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <style>
+    #field {
+      width: 200px;
+      border: 10px groove black;
+      background-color: #00FF00;
+      position: relative;
+    }
+
+    #ball {
+        width: 40px;
+        height: 40px;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div id="field">
+    <img src="https://en.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
+
+  <script>
+    const container = document.getElementById('field');
+    const element = document.getElementById('ball');
+
+    const leftPadding = container.clientWidth / 2 - element.offsetWidth / 2;
+    const topPadding = container.clientHeight / 2 - element.offsetHeight / 2;
+
+    console.log(container.clientWidth, element.offsetHeight);
+    console.log(container.clientHeight, element.offsetWidth);
+
+    element.style.top = topPadding + 'px';
+    element.style.left = leftPadding + 'px';
+  </script>
+
+</body>
+
+</html>

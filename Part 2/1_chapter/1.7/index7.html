@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: 1px solid black;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+    <script>
+        function createCalendar(elem, year, month) {
+
+
+            let lastDay = (new Date(year, month, 0)).getDate();
+            let currDay = (new Date(year, month - 1, 1)).getDay();
+
+            let innerCalendar = '<tr>';
+
+            for (let i = 1; i < currDay; i++) {
+                innerCalendar += '<td></td>';
+            }
+
+            for (let day = 1; day <= lastDay; day++) {
+                if (currDay == 1) {
+                    innerCalendar += '</tr><tr>';
+                }
+
+                innerCalendar += `<td align="center">${day}</td>`;
+                currDay = (currDay + 1) % 7;
+            }
+
+            while (currDay != 1) {
+                innerCalendar += '<td></td>';
+                currDay = (currDay + 1) % 7;
+            }
+
+            innerCalendar += '</tr>';
+
+            elem.innerHTML = `<table><tr>
+                    <th>пн</th><th>вт</th><th>ср</th><th>чт</th><th>пт</th><th>сб</th><th>вс</th>
+                </tr>${innerCalendar}</table>
+            `;
+        }
+
+        let cal = document.querySelector('.container');
+        createCalendar(cal, 2023, 2);
+    </script>
+</body>
+</html>
